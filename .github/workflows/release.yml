@@ -1,0 +1,47 @@
+# Publishes to Modrinth when a version tag is pushed (e.g. v1.2.3).
+#
+# MODRINTH_TOKEN is inherited from the organization secret.
+# MODRINTH_PROJECT_ID must be set as a repo variable before the first release:
+#   gh variable set MODRINTH_PROJECT_ID --repo Elduin-Labs/spacelaunch-mod --body "<id>"
+# Without it the run goes green and publishes nothing.
+
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - run: ./gradlew build --stacktrace
+
+      - uses: Kira-NT/mc-publish@v3.3.1
+        with:
+          modrinth-id: ${{ vars.MODRINTH_PROJECT_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          files: build/libs/!(*-sources|*-dev|*-shadow|*-javadoc).jar
+
+          name: ${{ github.ref_name }}
+          version: ${{ github.ref_name }}
+          version-type: release
+          changelog-file: CHANGELOG.md
+
+          game-versions: "1.21.11"
+          loaders: fabric
+          java: 21

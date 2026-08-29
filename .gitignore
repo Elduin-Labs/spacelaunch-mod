@@ -1,0 +1,27 @@
+# Build output — never commit. Minecraft dev trees are gigabytes of this.
+build/
+.gradle*/
+out/
+*.jar.tmp
+
+# Dev game instances. These hold worlds, logs and screenshots, and the logs
+# contain absolute paths with the account name in them.
+run/
+run2/
+run-*/
+
+# Secrets
+.env
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.settings/
+.classpath
+.project
+
+# macOS
+.DS_Store
