@@ -6,6 +6,7 @@
   "description": "Adds /spaceLaunch: fly to space, float, and then fail to fly.",
   "authors": ["Elduin"],
   "license": "MIT",
+  "icon": "assets/spacelaunch/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": ["com.spacelaunch.SpaceLaunchMod"]
