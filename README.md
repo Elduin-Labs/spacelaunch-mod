@@ -1,5 +1,7 @@
 # Space Launch
 
+<img src="src/main/resources/assets/spacelaunch/icon.png" width="128" align="right">
+
 Adds `/spaceLaunch`. You go up. You float. Then gravity remembers you.
 
 ## What happens
